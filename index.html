@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b0a">
+<meta name="description" content="BondStats System Pressure Index — tracking current pressure across global sovereign bond markets.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://botapi33.github.io/bondstats-system-pressure-index/">
+<meta property="og:title" content="BondStats System Pressure Index">
+<meta property="og:description" content="Tracking current pressure across global sovereign bond markets.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://botapi33.github.io/bondstats-system-pressure-index/">
+<title>BondStats System Pressure Index</title>
+<style>
+:root{--bg:#080b0a;--text:#f3f5f3;--muted:#8c9690;--muted2:#626b66;--line:#202723;--line2:#2a332e;--green:#75d36b;--green2:#a3e89c;--red:#d96b61;--amber:#d3ad66;--max:1180px}
+*{box-sizing:border-box}html{background:var(--bg);color-scheme:dark}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.015em}button,input{font:inherit}button{color:inherit}.shell{width:min(var(--max),calc(100% - 48px));margin:auto}.topbar{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{font-size:17px;font-weight:680;letter-spacing:-.035em}.live{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px}.dot{width:6px;height:6px;border-radius:50%;background:var(--amber)}.dot.ok{background:var(--green)}.dot.bad{background:var(--red)}.dot.loading{animation:pulse 1.25s infinite}@keyframes pulse{50%{opacity:.3}}.refresh{border:0;background:transparent;padding:0;color:var(--muted);font-size:11px;cursor:pointer}.refresh:hover{color:var(--text)}
+.hero{padding:72px 0 54px}.hero h1{margin:0;font-size:clamp(46px,6vw,78px);font-weight:620;letter-spacing:-.065em;line-height:.98}.sub{margin:18px 0 0;max-width:640px;color:#a7b0aa;font-size:17px;line-height:1.55}.meta{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:34px;flex-wrap:wrap;color:var(--muted);font-size:11px}.meta b{color:#cfd5d1;font-weight:560}.reading{padding:10px 0 50px}.score-row{display:flex;align-items:flex-end;gap:16px}.score{font-size:clamp(96px,13vw,156px);font-weight:520;line-height:.76;letter-spacing:-.085em}.denom{font-size:20px;color:var(--muted);padding-bottom:12px}.state{margin-top:22px;color:var(--green2);font-size:14px;font-weight:730;letter-spacing:.12em;text-transform:uppercase}.state.state-elevated,.state.state-high,.state.state-pressure-building{color:var(--amber)}.state.state-extreme{color:var(--red)}.narrative{margin:12px 0 0;max-width:700px;color:#abb4ae;font-size:14px;line-height:1.65}.gauge{margin-top:34px}.labels{display:grid;grid-template-columns:repeat(4,1fr);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#838d87}.labels span:nth-child(n+2){text-align:center}.labels span:last-child{text-align:right}.track{height:2px;background:#28302c;margin-top:10px;position:relative}.track i{display:block;height:100%;background:var(--green);width:0}.track b{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--green);transform:translate(-50%,-50%)}
+.section{border-top:1px solid var(--line);padding:48px 0}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:20px}.section-head h2{margin:0;font-size:27px;font-weight:590;letter-spacing:-.04em}.section-head p{margin:0;max-width:450px;color:var(--muted);font-size:11px;line-height:1.55}.drivers{border-top:1px solid var(--line2)}.driver{display:grid;grid-template-columns:minmax(220px,1.4fr) minmax(110px,.6fr) minmax(100px,.5fr) 80px;gap:20px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}.driver-title strong{display:block;font-size:15px;font-weight:610}.driver-title span{display:block;margin-top:6px;color:var(--muted);font-size:11px;line-height:1.45}.metric{font-size:17px;font-variant-numeric:tabular-nums}.driver-score{font-size:28px;font-weight:570;color:var(--green);font-variant-numeric:tabular-nums}.driver-score small{font-size:10px;color:var(--muted);font-weight:500}.weight{text-align:right;color:#d6dbd7;font-size:14px;font-variant-numeric:tabular-nums}
+.rank-head{display:flex;align-items:end;justify-content:space-between;gap:20px}.search{width:180px;border:0;border-bottom:1px solid var(--line2);background:transparent;color:var(--text);padding:7px 0;outline:0;font-size:11px}.search:focus{border-color:var(--green)}.table-wrap{overflow-x:auto;margin-top:12px}table{width:100%;border-collapse:collapse;font-size:12px}th{padding:11px 8px;border-bottom:1px solid var(--line2);font-size:9px;font-weight:560;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);text-align:left}td{padding:15px 8px;border-bottom:1px solid #171d19;color:#d9dedb;font-variant-numeric:tabular-nums}th:not(:nth-child(2)),td:not(:nth-child(2)){text-align:right}th:nth-child(1),td:nth-child(1){width:52px}th:nth-child(2),td:nth-child(2){text-align:left}.market{font-size:13px;color:var(--text);font-weight:590}.source{margin-top:4px;color:var(--muted2);font-size:8px;letter-spacing:.08em;text-transform:uppercase}.move-up{color:var(--amber)}.move-down{color:#9bc6a4}.p-score{font-weight:680;color:var(--green)}.mini-bar{display:inline-block;width:74px;height:2px;background:#232b27;vertical-align:middle;margin-left:12px;position:relative}.mini-bar i{display:block;height:100%;background:var(--green)}
+.method{display:grid;grid-template-columns:1.15fr .85fr;gap:70px}.method h3{font-size:18px;margin:0 0 13px;font-weight:600}.method p{color:var(--muted);font-size:12px;line-height:1.7;margin:0}.method-list{display:grid;gap:11px}.method-line{display:flex;justify-content:space-between;gap:20px;padding-bottom:11px;border-bottom:1px solid var(--line);font-size:11px}.method-line span{color:var(--muted)}.method-line b{font-weight:570;color:#d7ddd9}.error{margin:0 0 32px;padding:15px 0;border-top:1px solid #5d312d;border-bottom:1px solid #5d312d;color:#d99b94;font-size:12px;line-height:1.55}.footer{border-top:1px solid var(--line);padding:22px 0 32px;display:flex;justify-content:space-between;gap:18px;color:var(--muted2);font-size:10px}
+@media(max-width:760px){.shell{width:min(100% - 32px,var(--max))}.topbar{height:60px}.hero{padding:52px 0 40px}.hero h1{font-size:48px}.sub{font-size:15px}.meta{gap:18px 24px}.reading{padding-bottom:42px}.score{font-size:112px}.driver{grid-template-columns:1fr 90px 72px}.driver-title{grid-column:1/4}.metric{font-size:15px}.weight{font-size:12px}.section{padding:40px 0}.section-head,.rank-head{align-items:flex-start;flex-direction:column}.section-head p{max-width:none}.method{grid-template-columns:1fr;gap:32px}.search{width:100%}.labels{font-size:8px}.footer{flex-direction:column}.hide-mobile{display:none}}
+@media(max-width:460px){.hero h1{font-size:41px}.score{font-size:96px}.denom{font-size:16px}.meta{display:grid;grid-template-columns:1fr 1fr}.driver{grid-template-columns:1fr 70px 64px;gap:12px}.market{font-size:12px}td,th{padding-left:5px;padding-right:5px}.mini-bar{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar"><div class="brand">BondStats</div><div class="live"><span id="statusDot" class="dot loading"></span><span id="statusText">Loading</span><button id="refreshBtn" class="refresh">Refresh</button></div></header>
+<main>
+<section class="hero">
+<h1>System Pressure Index</h1>
+<p class="sub">Tracking current pressure across global sovereign bond markets.</p>
+<div class="meta"><span><b id="eligibleCount">—</b> markets</span><span><b id="observationDate">—</b> observation</span><span>Source updated <b id="sourceUpdated">—</b></span></div>
+</section>
+<section class="reading">
+<div class="score-row"><div id="score" class="score">—</div><div class="denom">/100</div></div>
+<div id="state" class="state">Waiting for data</div>
+<p id="narrative" class="narrative">The current reading will appear when the BondStats dataset has loaded.</p>
+<div class="gauge"><div class="labels"><span>Normal</span><span>Building</span><span>Elevated</span><span>High</span></div><div class="track"><i id="gaugeFill"></i><b id="gaugeMarker"></b></div></div>
+</section>
+<section class="section">
+<div class="section-head"><h2>Pressure drivers</h2><p>Four observable sovereign-rate dimensions. Only fresh daily data enters the live reading.</p></div>
+<div id="components" class="drivers"></div>
+</section>
+<section class="section">
+<div class="rank-head"><div class="section-head" style="margin:0"><h2>Market ranking</h2></div><input id="search" class="search" type="search" placeholder="Filter market" aria-label="Filter market"></div>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Market</th><th>10Y yield</th><th>Daily move</th><th>Pressure</th><th class="hide-mobile">Observation</th></tr></thead><tbody id="marketRows"></tbody></table></div>
+</section>
+<section class="section method">
+<div><h3>Methodology</h3><p>The index is a current sovereign-rate pressure snapshot, not a credit rating, crisis probability or trading signal. It combines yield level, move intensity, stress breadth and upward pressure. The construction is deliberately fixed and transparent so changes in the reading reflect the market data rather than changes in the model.</p></div>
+<div class="method-list"><div class="method-line"><span>Yield Level</span><b>40%</b></div><div class="method-line"><span>Move Intensity</span><b>25%</b></div><div class="method-line"><span>Stress Breadth</span><b>20%</b></div><div class="method-line"><span>Upward Pressure</span><b>15%</b></div><div class="method-line"><span>Eligibility</span><b>Daily · ≤ 7 days · non-fallback</b></div></div>
+</section>
+<section id="errorBox" class="error" hidden></section>
+</main>
+<footer class="footer"><span>BondStats System Pressure Index</span><span>Source: BondStats Global Yields · Informational use only</span></footer>
+</div>
+<script>
+const DATA_URL = 'https://botapi33.github.io/bondstats-global-yields/global_yields.json';
+
+const CONFIG = Object.freeze({
+  maxFreshDays: 7,
+  minEligibleMarkets: 5,
+  weights: Object.freeze({ level: 40, move: 25, breadth: 20, direction: 15 }),
+  breadthThresholdBps: 3,
+  directionThresholdBps: 1
+});
+
+const STATE_BANDS = [
+  [24, 'Contained'],
+  [39, 'Normal'],
+  [54, 'Pressure Building'],
+  [69, 'Elevated'],
+  [84, 'High'],
+  [100, 'Extreme']
+];
+
+const clamp = (x, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, x));
+
+function linearScore(value, stops) {
+  if (!Number.isFinite(value)) return null;
+  if (value <= stops[0][0]) return stops[0][1];
+  for (let i = 1; i < stops.length; i += 1) {
+    const [x1, y1] = stops[i];
+    const [x0, y0] = stops[i - 1];
+    if (value <= x1) return y0 + ((value - x0) * (y1 - y0)) / (x1 - x0);
+  }
+  return stops[stops.length - 1][1];
+}
+
+function median(values) {
+  const a = values.filter(Number.isFinite).sort((a, b) => a - b);
+  if (!a.length) return null;
+  const m = Math.floor(a.length / 2);
+  return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
+}
+
+function parseNumber(v) {
+  if (v === null || v === undefined || v === '') return null;
+  const n = typeof v === 'number' ? v : Number(String(v).replace('%', '').replace(',', '.').trim());
+  return Number.isFinite(n) ? n : null;
+}
+
+function parseDataset(raw) {
+  if (!raw || typeof raw !== 'object' || !raw.countries || typeof raw.countries !== 'object') {
+    throw new Error('Unexpected BondStats JSON schema: missing countries object.');
+  }
+
+  const markets = Object.entries(raw.countries).map(([key, row]) => {
+    const value = parseNumber(row.value);
+    const previousValue = parseNumber(row.previousValue);
+    const rawChange = parseNumber(row.change);
+    const changePctPoints = rawChange ?? (Number.isFinite(value) && Number.isFinite(previousValue) ? value - previousValue : null);
+    const changeBps = Number.isFinite(changePctPoints) ? changePctPoints * 100 : null;
+    const stalenessDays = parseNumber(row.stalenessDays);
+    return {
+      key,
+      label: row.label || key.replaceAll('_', ' '),
+      source: row.source || 'unknown',
+      frequency: row.frequency || 'Unknown',
+      date: row.date || '',
+      previousDate: row.previousDate || '',
+      value,
+      previousValue,
+      changePctPoints,
+      changeBps,
+      stalenessDays,
+      tier: row.tier || 'unknown',
+      isFallback: Boolean(row.isFallback)
+    };
+  }).filter(m => Number.isFinite(m.value));
+
+  if (!markets.length) throw new Error('BondStats JSON contains no numeric market values.');
+  return {
+    meta: {
+      title: raw.meta?.title || 'BondStats Global Yields',
+      lastUpdated: raw.meta?.lastUpdated || ''
+    },
+    markets
+  };
+}
+
+function isEligible(m, config = CONFIG) {
+  return String(m.frequency).toLowerCase() === 'daily'
+    && Number.isFinite(m.value)
+    && Number.isFinite(m.changeBps)
+    && Number.isFinite(m.stalenessDays)
+    && m.stalenessDays <= config.maxFreshDays
+    && !m.isFallback;
+}
+
+function yieldLevelScore(yieldPct) {
+  return clamp(linearScore(yieldPct, [
+    [0, 0], [1, 8], [2, 20], [3, 35], [4, 55], [5, 72], [6, 84], [8, 96], [10, 100]
+  ]));
+}
+
+function moveIntensityScore(absMoveBps) {
+  return clamp(linearScore(absMoveBps, [
+    [0, 0], [1, 8], [2, 18], [3, 30], [5, 48], [8, 66], [12, 80], [20, 93], [30, 100]
+  ]));
+}
+
+function marketPressure(m) {
+  const level = yieldLevelScore(m.value);
+  const move = moveIntensityScore(Math.abs(m.changeBps || 0));
+  const rising = Number.isFinite(m.changeBps) && m.changeBps > CONFIG.directionThresholdBps
+    ? linearScore(m.changeBps, [[1, 10], [3, 35], [5, 60], [10, 85], [20, 100]])
+    : 0;
+  return clamp(level * 0.6 + move * 0.25 + rising * 0.15);
+}
+
+function stateFor(score) {
+  if (!Number.isFinite(score)) return 'Unavailable';
+  return STATE_BANDS.find(([max]) => score <= max)?.[1] || 'Extreme';
+}
+
+function stateNarrative(score) {
+  const state = stateFor(score);
+  const map = {
+    Contained: 'Sovereign-rate pressure is contained across the fresh daily market set. Current moves are limited and broad stress is not evident.',
+    Normal: 'The sovereign complex is operating within a normal pressure range. Financing levels remain meaningful, but daily moves are broadly orderly.',
+    'Pressure Building': 'Pressure is building across the monitored sovereign complex. Yield levels, daily moves or breadth are becoming more demanding.',
+    Elevated: 'Elevated pressure is visible across several dimensions of the fresh daily sovereign-rate set and warrants closer monitoring.',
+    High: 'High sovereign-rate pressure is present across the monitored market set, with substantial movement or broad participation in the stress signal.',
+    Extreme: 'The index is registering extreme sovereign-rate pressure under the published methodology. Underlying markets should be reviewed individually.'
+  };
+  return map[state] || 'The current reading is unavailable.';
+}
+
+function computeIndex(dataset, config = CONFIG) {
+  const eligible = dataset.markets.filter(m => isEligible(m, config));
+  const excluded = dataset.markets.filter(m => !isEligible(m, config));
+  if (eligible.length < config.minEligibleMarkets) {
+    throw new Error(`Only ${eligible.length} fresh daily markets are eligible; at least ${config.minEligibleMarkets} are required.`);
+  }
+
+  const medianYield = median(eligible.map(m => m.value));
+  const medianAbsMove = median(eligible.map(m => Math.abs(m.changeBps)));
+  const breadthShare = eligible.filter(m => Math.abs(m.changeBps) >= config.breadthThresholdBps).length / eligible.length;
+  const risingShare = eligible.filter(m => m.changeBps >= config.directionThresholdBps).length / eligible.length;
+
+  const components = [
+    {
+      id: 'level',
+      name: 'Yield Level',
+      weight: config.weights.level,
+      score: yieldLevelScore(medianYield),
+      metric: `${medianYield.toFixed(2)}%`,
+      description: 'Median 10Y yield across fresh daily markets.'
+    },
+    {
+      id: 'move',
+      name: 'Move Intensity',
+      weight: config.weights.move,
+      score: moveIntensityScore(medianAbsMove),
+      metric: `${medianAbsMove.toFixed(1)} bp`,
+      description: 'Median absolute daily yield move across fresh markets.'
+    },
+    {
+      id: 'breadth',
+      name: 'Stress Breadth',
+      weight: config.weights.breadth,
+      score: clamp(breadthShare * 100),
+      metric: `${Math.round(breadthShare * 100)}%`,
+      description: `Share of fresh markets moving at least ${config.breadthThresholdBps} bp in either direction.`
+    },
+    {
+      id: 'direction',
+      name: 'Upward Pressure',
+      weight: config.weights.direction,
+      score: clamp(risingShare * 100),
+      metric: `${Math.round(risingShare * 100)}%`,
+      description: `Share of fresh markets with yields rising at least ${config.directionThresholdBps} bp.`
+    }
+  ];
+
+  const totalWeight = components.reduce((s, c) => s + c.weight, 0);
+  const score = components.reduce((s, c) => s + c.score * c.weight, 0) / totalWeight;
+  const ranking = [...eligible].map(m => ({ ...m, pressure: marketPressure(m) })).sort((a, b) => b.pressure - a.pressure);
+  const rising = eligible.filter(m => m.changeBps > 0).length;
+  const falling = eligible.filter(m => m.changeBps < 0).length;
+  const flat = eligible.length - rising - falling;
+  const largestMove = [...eligible].sort((a, b) => Math.abs(b.changeBps) - Math.abs(a.changeBps))[0];
+  const highestYield = [...eligible].sort((a, b) => b.value - a.value)[0];
+
+  const dataQuality = {
+    total: dataset.markets.length,
+    eligible: eligible.length,
+    excluded: excluded.length,
+    stale: excluded.filter(m => Number.isFinite(m.stalenessDays) && m.stalenessDays > config.maxFreshDays).length,
+    monthly: excluded.filter(m => String(m.frequency).toLowerCase() !== 'daily').length,
+    fallback: excluded.filter(m => m.isFallback).length
+  };
+
+  return {
+    score,
+    state: stateFor(score),
+    narrative: stateNarrative(score),
+    components,
+    eligible,
+    excluded,
+    ranking,
+    stats: { medianYield, medianAbsMove, breadthShare, risingShare, rising, falling, flat, largestMove, highestYield },
+    dataQuality,
+    meta: dataset.meta
+  };
+}
+
+
+
+const $ = id => document.getElementById(id);
+let current = null;
+function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function fmtDate(v){if(!v)return '—';const d=new Date(`${v}T00:00:00Z`);return Number.isNaN(d.getTime())?v:new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'}).format(d)}
+function fmtBp(v){return Number.isFinite(v)?`${v>0?'+':''}${v.toFixed(1)} bp`:'—'}
+function stateClass(state){return `state-${String(state).toLowerCase().replaceAll(' ','-')}`}
+function renderGauge(score){const pct=Math.max(0,Math.min(100,score));$('gaugeFill').style.width=`${pct}%`;$('gaugeMarker').style.left=`${pct}%`}
+function renderComponents(items){$('components').innerHTML=items.map(c=>`<div class="driver"><div class="driver-title"><strong>${esc(c.name)}</strong><span>${esc(c.description)}</span></div><div class="metric">${esc(c.metric)}</div><div class="driver-score">${Math.round(c.score)} <small>/100</small></div><div class="weight">${c.weight}%</div></div>`).join('')}
+function renderRanking(result,filter=''){const q=filter.trim().toLowerCase();const rows=result.ranking.filter(m=>!q||m.label.toLowerCase().includes(q));$('marketRows').innerHTML=rows.map((m,i)=>`<tr><td>${i+1}</td><td><div class="market">${esc(m.label)}</div><div class="source">${esc(m.source)} · ${esc(m.tier)}</div></td><td>${m.value.toFixed(3)}%</td><td class="${m.changeBps>0?'move-up':m.changeBps<0?'move-down':''}">${fmtBp(m.changeBps)}</td><td><span class="p-score">${Math.round(m.pressure)}</span><span class="mini-bar"><i style="width:${Math.max(0,Math.min(100,m.pressure))}%"></i></span></td><td class="hide-mobile">${fmtDate(m.date)}</td></tr>`).join('')||`<tr><td colspan="6">No matching fresh daily markets.</td></tr>`}
+function render(result){current=result;const score=Math.round(result.score);$('score').textContent=score;$('state').textContent=result.state;$('state').className=`state ${stateClass(result.state)}`;$('narrative').textContent=result.narrative;$('sourceUpdated').textContent=fmtDate(result.meta.lastUpdated);$('observationDate').textContent=fmtDate(result.eligible.map(m=>m.date).sort().at(-1));$('eligibleCount').textContent=result.eligible.length;$('statusText').textContent='Latest available';$('statusDot').className='dot ok';renderGauge(score);renderComponents(result.components);renderRanking(result,$('search').value)}
+async function load(){$('errorBox').hidden=true;$('statusText').textContent='Updating';$('statusDot').className='dot loading';$('refreshBtn').disabled=true;try{const response=await fetch(`${DATA_URL}?t=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error(`BondStats data returned HTTP ${response.status}.`);const raw=await response.json();const dataset=parseDataset(raw);const result=computeIndex(dataset);render(result)}catch(err){console.error(err);$('statusText').textContent='Data unavailable';$('statusDot').className='dot bad';$('errorBox').hidden=false;$('errorBox').innerHTML=`<strong>Unable to calculate the current index.</strong><br>${esc(err.message)}`}finally{$('refreshBtn').disabled=false}}
+$('refreshBtn').addEventListener('click',load);$('search').addEventListener('input',e=>current&&renderRanking(current,e.target.value));load();
+</script>
+</body></html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://botapi33.github.io/bondstats-system-pressure-index/sitemap.xml
